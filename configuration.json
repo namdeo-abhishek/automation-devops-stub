@@ -1,0 +1,32 @@
+{
+    "only_terminal":true,
+    "version" : "1.0",
+    "read_only_files" : [
+        "init.sh",
+        "test_solution.py"
+    ],
+    "default_open_files": ["solution.sh"],
+    "scoring" : {
+        "command" : "/bin/bash $HOME/$NAME/init.sh && python3 -m pytest $HOME/$NAME/test_solution.py -v --junit-xml $HOME/$NAME/junit.xml -s",
+        "files" : {
+            "junit.xml" : "Linux Basic Tests"
+        }
+    },
+    "buttons" : {
+        "build" : {
+            "command" : "/bin/bash $HOME/$NAME/init.sh"
+        },
+        "test" : {
+            "command" : "python3 -m pytest $HOME/$NAME/test_solution.py --junit-xml=/home/coder/junit.xml --tb=no -s -v",
+            "dependencies" : ["/bin/bash $HOME/$NAME/init.sh"]
+        },
+        "reset" : {
+            "command" : "/bin/bash $HOME/$NAME/init.sh"
+        }
+    },
+    "post_start" : {
+        "commands" : [
+            "/bin/bash $HOME/$NAME/init.sh"
+        ]
+    }
+}
